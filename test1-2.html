@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html> 
+
+<head>
+	<title>Random Geometry Generator</title>
+	<link rel="stylesheet" type="text/css" href="test1-2.css">
+</head>
+<body>
+
+<div id="topbarleft">
+  <p><h1><font color="white"><font size=30pt;>Random Geometry Generator</font></font></h1></p>
+</div>
+<div id="topbarright">
+  <p><font color=#FFFFFF><font size=4pt;>Luoqing Wang</a></font></font></p>
+</div>
+
+	<canvas id="canvas" width="800" height="600";></canvas>
+	<script>
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+
+		// random colors
+		function randomColor() {
+			var letters = "0123456789ABCDEF";
+			var color = "#";
+			for (var i = 0; i < 6; i++) {
+				color += letters[Math.floor(Math.random() * 16)];
+			}
+			return color;
+		}
+
+		// random shapes
+		// <meta http-equiv="refresh" content="2">
+		function drawShape() {
+			var choice = Math.floor(Math.random() * 3) + 1; // generate different shapes
+			ctx.beginPath();
+			ctx.fillStyle = randomColor();
+
+			if (choice == 1) { // circle
+				var radius = 50 + Math.random() * 100;
+				var x = Math.random() * (canvas.width - radius * 2) + radius; // 
+				var y = Math.random() * (canvas.height - radius * 2) + radius;
+				ctx.arc(x, y, radius, 0, 2 * Math.PI);
+
+			} else if (choice == 2) { // square
+				var size = 50 + Math.random() * 100;
+				var x = Math.random() * (canvas.width - size);
+				var y = Math.random() * (canvas.height - size);
+				ctx.fillRect(x, y, size, size);
+			
+			} else { // triangle
+				var size = 50 + Math.random() * 100;
+				var x = Math.random() * (canvas.width - size);
+				var y = Math.random() * (canvas.height - size);
+				ctx.moveTo(x, y);
+				ctx.lineTo(x + size, y);
+				ctx.lineTo(x + size / 2, y + size);
+				ctx.closePath();
+			}
+
+			ctx.fill();
+		}
+
+		// amount of shapes
+		for (var i = 0; i < 20; i++) {
+			drawShape();
+		}
+	</script>
+
+	<div id=box1>
+		<p><h2><font size=6pt;><br>Work Description</font></h2></p>
+		
+		<p style="text-align: left; padding-left: 20px; padding-right: 20px;"><b>Motivation: </b>My studio course is sensory design. In the course, I explored the relationship between taste and color, and shape (for example, from the results of the survey I sent, I know that most of the testers think that salt tastes blue, round shape), this random shape generator can give people more choices about color and shape.
+			<br><b>Concept: </b>randomness</p>
+		
+		<p><font size=5pt;>now click to generate new shapes</font></p>
+	</div>
+
+	<div id=box2 onclick="location.reload()">
+		<p class='box2'><font color=#FFFFFF ><br>Click me</a></font></p>
+	</div>
+</body>
+</html>
